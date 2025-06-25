@@ -1,115 +1,179 @@
+import * as React from "react"
 import {
-    ChevronRight,
-    Menu,
-} from "lucide-react"
-import { mainMenu } from '@/config/menu'
-import { Link, NavLink } from 'react-router-dom'
-import { Button } from "@/components/ui/button"
-import {
-    Popover,
-    PopoverContent,
-    PopoverTrigger,
-} from "@/components/ui/popover"
-import {
-    Sidebar,
-    SidebarContent,
-    SidebarGroup,
-    SidebarGroupContent,
-    SidebarMenu,
-    SidebarMenuButton,
-    SidebarMenuItem,
-    SidebarMenuSub,
-    SidebarMenuSubButton,
-    SidebarMenuSubItem,
-    SidebarProvider,
-} from "@/components/ui/sidebar"
-import {
-    Collapsible,
-    CollapsibleContent,
-    CollapsibleTrigger,
-} from "@/components/ui/collapsible"
-import { cn } from '@/lib/utils'
+  IconCamera,
+  IconChartBar,
+  IconDashboard,
+  IconDatabase,
+  IconFileAi,
+  IconFileDescription,
+  IconFileWord,
+  IconFolder,
+  IconHelp,
+  IconInnerShadowTop,
+  IconListDetails,
+  IconReport,
+  IconSearch,
+  IconSettings,
+  IconUsers,
+} from "@tabler/icons-react"
 
-export function AppSidebar() {
-    return (
-        <SidebarProvider>
-            <div className="flex items-center md:hidden">
-                <Popover>
-                    <PopoverTrigger asChild>
-                        <Button
-                            variant="ghost"
-                            size="icon"
-                            className="h-7 w-7 data-[state=open]:bg-accent">
-                            <Menu />
-                        </Button>
-                    </PopoverTrigger>
-                    <PopoverContent
-                        className="w-56 overflow-hidden rounded-lg p-0"
-                        align="start">
-                        <Sidebar collapsible="none" className="bg-transparent">
-                            <SidebarContent>
-                                <SidebarGroup>
-                                    <SidebarGroupContent className="gap-0">
-                                        <SidebarMenu>
-                                            {mainMenu.map((item, index) => (
-                                                item.items && item.items.length > 0 ? (
-                                                    <Collapsible
-                                                        key={item.title}
-                                                        asChild
-                                                        defaultOpen={location.pathname.startsWith(item.url)}
-                                                        className="group/collapsible">
-                                                        <SidebarMenuItem>
-                                                            <CollapsibleTrigger asChild>
-                                                                <SidebarMenuButton tooltip={item.title}>
-                                                                    {item.icon && <item.icon />}
-                                                                    <span>{item.title}</span>
-                                                                    <ChevronRight className="ml-auto transition-transform duration-200 group-data-[state=open]/collapsible:rotate-90" />
-                                                                </SidebarMenuButton>
-                                                            </CollapsibleTrigger>
-                                                            <CollapsibleContent>
-                                                                <SidebarMenuSub>
-                                                                    {item.items?.map((subItem) => (
-                                                                        <SidebarMenuSubItem key={subItem.title}>
-                                                                            <SidebarMenuSubButton asChild>
-                                                                                <NavLink
-                                                                                    to={subItem.url}
-                                                                                    className={cn(
-                                                                                        'cursor-pointer',
-                                                                                        subItem.url === location.pathname && 'bg-muted'
-                                                                                    )}>
-                                                                                    <span>{subItem.title}</span>
-                                                                                </NavLink>
-                                                                            </SidebarMenuSubButton>
-                                                                        </SidebarMenuSubItem>
-                                                                    ))}
-                                                                </SidebarMenuSub>
-                                                            </CollapsibleContent>
-                                                        </SidebarMenuItem>
-                                                    </Collapsible>
-                                                ) : (
-                                                    <SidebarMenuItem key={index}>
-                                                        <SidebarMenuButton asChild>
-                                                            <Link
-                                                                to={item.url}
-                                                                className={cn(
-                                                                    'cursor-pointer',
-                                                                    item.url === location.pathname && 'bg-muted'
-                                                                )}>
-                                                                {item.icon && <item.icon className="!" />}
-                                                                <span>{item.title}</span>
-                                                            </Link>
-                                                        </SidebarMenuButton>
-                                                    </SidebarMenuItem>
-                                                )
-                                            ))}
-                                        </SidebarMenu>
-                                    </SidebarGroupContent>
-                                </SidebarGroup>
-                            </SidebarContent>
-                        </Sidebar>
-                    </PopoverContent>
-                </Popover>
-            </div>
-        </SidebarProvider>
-    )
+import { NavDocuments } from "@/components/nav-documents"
+import { NavMain } from "@/components/nav-main"
+import { NavSecondary } from "@/components/nav-secondary"
+import { NavUser } from "@/components/nav-user"
+import {
+  Sidebar,
+  SidebarContent,
+  SidebarFooter,
+  SidebarHeader,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/components/ui/sidebar"
+
+const data = {
+  user: {
+    name: "shadcn",
+    email: "m@example.com",
+    avatar: "/avatars/shadcn.jpg",
+  },
+  navMain: [
+    {
+      title: "Dashboard",
+      url: "#",
+      icon: IconDashboard,
+    },
+    {
+      title: "Lifecycle",
+      url: "#",
+      icon: IconListDetails,
+    },
+    {
+      title: "Analytics",
+      url: "#",
+      icon: IconChartBar,
+    },
+    {
+      title: "Projects",
+      url: "#",
+      icon: IconFolder,
+    },
+    {
+      title: "Team",
+      url: "#",
+      icon: IconUsers,
+    },
+  ],
+  navClouds: [
+    {
+      title: "Capture",
+      icon: IconCamera,
+      isActive: true,
+      url: "#",
+      items: [
+        {
+          title: "Active Proposals",
+          url: "#",
+        },
+        {
+          title: "Archived",
+          url: "#",
+        },
+      ],
+    },
+    {
+      title: "Proposal",
+      icon: IconFileDescription,
+      url: "#",
+      items: [
+        {
+          title: "Active Proposals",
+          url: "#",
+        },
+        {
+          title: "Archived",
+          url: "#",
+        },
+      ],
+    },
+    {
+      title: "Prompts",
+      icon: IconFileAi,
+      url: "#",
+      items: [
+        {
+          title: "Active Proposals",
+          url: "#",
+        },
+        {
+          title: "Archived",
+          url: "#",
+        },
+      ],
+    },
+  ],
+  navSecondary: [
+    {
+      title: "Settings",
+      url: "#",
+      icon: IconSettings,
+    },
+    {
+      title: "Get Help",
+      url: "#",
+      icon: IconHelp,
+    },
+    {
+      title: "Search",
+      url: "#",
+      icon: IconSearch,
+    },
+  ],
+  documents: [
+    {
+      name: "Data Library",
+      url: "#",
+      icon: IconDatabase,
+    },
+    {
+      name: "Reports",
+      url: "#",
+      icon: IconReport,
+    },
+    {
+      name: "Word Assistant",
+      url: "#",
+      icon: IconFileWord,
+    },
+  ],
+}
+
+export function AppSidebar({ ...props }: React.ComponentProps<typeof Sidebar>) {
+  return (
+    <Sidebar collapsible="offcanvas" {...props}>
+      <SidebarHeader>
+        <SidebarMenu>
+          <SidebarMenuItem>
+            <SidebarMenuButton
+              asChild
+              className="data-[slot=sidebar-menu-button]:!p-1.5"
+            >
+              <a href="#">
+                <IconInnerShadowTop className="!size-5" />
+                <span className="text-base font-semibold">Acme Inc.</span>
+              </a>
+            </SidebarMenuButton>
+          </SidebarMenuItem>
+        </SidebarMenu>
+      </SidebarHeader>
+      <SidebarContent>
+        <NavMain items={data.navMain} />
+        <NavDocuments items={data.documents} />
+        <NavSecondary items={data.navSecondary} className="mt-auto" />
+      </SidebarContent>
+      <SidebarFooter>
+        <NavUser user={data.user} />
+      </SidebarFooter>
+    </Sidebar>
+  )
 }

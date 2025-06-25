@@ -1,16 +1,18 @@
 import { Outlet } from 'react-router'
 import { AppHeader } from './app-header'
-import { AppFooter } from './app-footer'
+// import { AppFooter } from './app-footer'
+import { AppSidebar } from './app-sidebar'
 
 export function AppLayout() {
     return (
-        <div className="min-h-screen flex flex-col w-full ~bg-muted/50">
-            <AppHeader />
-            <div className="w-full max-w-7xl mx-auto px-4 md:px-8 flex flex-grow flex-col">
-                <div className='flex flex-grow flex-col'>
+        <div className="min-h-screen w-full flex bg-muted/50">
+            <AppSidebar  />
+            <div className="flex-1 flex flex-col">
+                <AppHeader />
+                <main className="">
                     <Outlet />
-                </div>
-                <AppFooter />
+                </main>
+                {/* <AppFooter /> */}
             </div>
         </div>
     )
