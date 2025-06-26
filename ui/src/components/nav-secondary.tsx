@@ -1,7 +1,6 @@
 "use client"
 
 import * as React from "react"
-import { type Icon } from "@tabler/icons-react"
 
 import {
   SidebarGroup,
@@ -10,16 +9,13 @@ import {
   SidebarMenuButton,
   SidebarMenuItem,
 } from "@/components/ui/sidebar"
+import { MenuItemType } from "@/config/menu"
 
 export function NavSecondary({
   items,
   ...props
 }: {
-  items: {
-    title: string
-    url: string
-    icon: Icon
-  }[]
+  items: MenuItemType[]
 } & React.ComponentPropsWithoutRef<typeof SidebarGroup>) {
   return (
     <SidebarGroup {...props}>
@@ -29,7 +25,7 @@ export function NavSecondary({
             <SidebarMenuItem key={item.title}>
               <SidebarMenuButton asChild>
                 <a href={item.url}>
-                  <item.icon />
+                  {item.icon && <item.icon />}
                   <span>{item.title}</span>
                 </a>
               </SidebarMenuButton>
