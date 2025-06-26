@@ -2,17 +2,21 @@ import { BrowserRouter, HashRouter } from 'react-router'
 import { ThemeProvider } from './contexts/ThemeContext'
 import Router from './Router'
 import { AuthProvider } from './contexts/AuthContext'
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query'
 
 const AppRouter = import.meta.env.VITE_USE_HASH_ROUTE === 'true' ? HashRouter : BrowserRouter
 
 export default function App() {
+    const queryClient = new QueryClient();
     return (
-        <AuthProvider>
+        <QueryClientProvider client={queryClient}>
             <ThemeProvider>
                 <AppRouter>
-                    <Router />
+                    <AuthProvider>
+                        <Router />
+                    </AuthProvider>
                 </AppRouter>
             </ThemeProvider>
-        </AuthProvider>
+        </QueryClientProvider>
     )
 }

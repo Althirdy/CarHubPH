@@ -4,6 +4,7 @@ import NotMatch from './pages/NotMatch'
 import Dashboard from './pages/Dashboard'
 import Login from './pages/Auth/Login'
 import ProtectedRoute from './components/routes/ProtectedRoute'
+import GuestRoute from './components/routes/GuestRoute'
 
 export default function Router() {
     return (
@@ -18,8 +19,14 @@ export default function Router() {
                     </ProtectedRoute>
                 } />
             </Route>
+            <Route path="/AdminAuth" element={
+                <GuestRoute>
+                    <Login />
+                </GuestRoute>
+            } />
+
+
             <Route path="*" element={<NotMatch />} />
-            <Route path="/AdminAuth" element={<Login />} />
 
         </Routes>
     )

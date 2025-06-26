@@ -9,7 +9,6 @@ interface ProtectedRouteProps {
 
 export default function ProtectedRoute({ children, allowedRoles }: ProtectedRouteProps) {
     const { currentUser, loading } = useAuth();
-
     // Global loading screen
     if (loading) {
         return (

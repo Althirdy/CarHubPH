@@ -5,11 +5,13 @@ import { useLocation } from "react-router-dom"
 import { mainMenu, MenuItemType } from "@/config/menu"
 import { useEffect, useState } from "react"
 import { ModeToggle } from "./mode-toggle"
+import { appConfig } from "@/config/app"
 
 export function SiteHeader() {
   const location = useLocation()
   const [currentMenu, setCurrentMenu] = useState<MenuItemType | null>(null)
-  console.log(location.pathname)
+
+
   useEffect(() => {
     const currentMenu = mainMenu.navMain.find(menu => menu.url === location.pathname)
     if (currentMenu) {
@@ -33,7 +35,7 @@ export function SiteHeader() {
           <ModeToggle />
           <Button variant="ghost" asChild size="sm" className="hidden sm:flex">
             <a
-              href="https://github.com/shadcn-ui/ui/tree/main/apps/v4/app/(examples)/dashboard"
+              href={appConfig.github.url}
               rel="noopener noreferrer"
               target="_blank"
               className="dark:text-foreground"
